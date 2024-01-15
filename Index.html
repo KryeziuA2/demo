@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sleep Health and lifestyle</title>
+  <!-- Include separate script files for other entities -->
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script src="age_visualization.js" defer></script>
+  <script src="gender_visualization.js" defer></script>
+  <script src="occupation_visualization.js" defer></script>
+  <script src="SleepDuration_visualization.js" defer></script>
+  <script src="StressLevel_Visualization.js" defer></script>
+  <script src="StressSleepRelationshipVisualization.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <h1>Sleep Health and lifestyle</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="Index.html">Home</a></li>
+    </ul>
+  </nav>
+  <!-- Dropdown container -->
+  <div class="dropdown-container">
+    <label for="visualizationType">Select Type:</label>
+    <select id="visualizationType" name="visualizationType" class="dropdown-menu">
+      <option disabled selected>Select Any 1 Entity</option>
+      <option value="single">Single Entities</option>
+      <option value="relationship">Relationship</option>
+    </select>
+  </div>
+
+  <div class="content-container">
+    <div id="age" class="visualization" style="display: none;">
+      <!-- Content for Age Visualization -->
+    </div>
+
+    <div id="gender" class="visualization" style="display: none;">
+      <!-- Content for Gender Visualization -->
+    </div>
+
+    <div id="occupation" class="visualization" style="display: none;">
+      <!-- Content for Occupation Visualization -->
+    </div>
+
+    <div id="sleepDuration" class="visualization" style="display: none;">
+      <!-- Content for Sleep Duration Visualization -->
+    </div>
+
+    <div id="stressLevel" class="visualization" style="display: none;">
+      <!-- Content for Stress Level Visualization -->
+    </div>
+
+    <div id="stressSleepRelationship" class="visualization" style="display: none;">
+      <!-- Content for Stress-Sleep Relationship Visualization -->
+    </div>
+    
+  </div>
+
+  <!-- Add placeholders for other entities -->
+
+  <div class="footer-container">
+    <footer>
+      <p>&copy; 2024 Health Metrics Visualization</p>
+    </footer>
+  </div>
+  <script>
+    document.getElementById('visualizationType').addEventListener('change', function() {
+      var selectedType = this.value;
+
+      // Hide all visualizations
+      document.getElementById('age').style.display = 'none';
+      document.getElementById('gender').style.display = 'none';
+      document.getElementById('occupation').style.display = 'none';
+      document.getElementById('sleepDuration').style.display = 'none';
+      document.getElementById('stressLevel').style.display = 'none';
+      document.getElementById('stressSleepRelationship').style.display = 'none';
+
+     
+// Show the selected visualization based on the dropdown value
+if (selectedType === 'single') {
+        document.getElementById('age').style.display = 'block';
+        document.getElementById('gender').style.display = 'block';
+        document.getElementById('occupation').style.display = 'block';
+        document.getElementById('sleepDuration').style.display = 'block';
+        document.getElementById('stressLevel').style.display = 'block';
+        // Add similar lines for other visualizations in 'single' case
+      } else if (selectedType === 'relationship') {
+        document.getElementById('stressSleepRelationship').style.display = 'block';
+      }
+    });
+  </script>
+
+</body>
+
+</html>

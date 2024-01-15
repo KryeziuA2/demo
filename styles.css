@@ -1,0 +1,105 @@
+/* styles.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 10px; /* Increase padding for more space from top and left sides */
+    background-color: #f8f8f8;
+  }
+  
+  nav {
+    background-color: #4fd484;
+    margin-bottom: 10px; /* Add margin at the bottom of the navigation bar */
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  li {
+    display: inline;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px;
+    display: inline-block;
+  }
+  
+  a:hover {
+    background-color: #3da469;
+  }
+  
+  /* Header */
+  header {
+    background-color: #4fd484;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    margin-bottom: 20px; /* Add margin at the bottom of the header */
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+  
+  .visualization {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding-top: 40px; /* Add padding to the top */
+    padding-left: 40px; /* Add padding to the left */
+  }
+  
+ 
+  
+  /* Dropdown styling */
+  .dropdown-container {
+    margin-bottom: 20px;
+    text-align: center; /* Center the dropdown */
+  }
+  
+  .dropdown-menu {
+    padding: 12px; /* Increase padding for a larger size */
+    font-size: 16px;
+    border: aqua;
+    border-radius: 4px;
+    background-color: #4fd484; /* Dropdown background color */
+    color: #fff; /* Dropdown text color */
+    cursor: grab;
+  }
+  
+  .dropdown-menu option {
+    background-color: #5eeaa4; /* Option background color */
+    color: #fff; /* Option text color */
+  }
+  
+  .dropdown-menu option:hover {
+    background-color: #3da469; /* Hover background color */
+  }
+  footer {
+    background-color: #5eeaa4;
+    height: 40px; /* Increase the height for more padding */
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    left: 0; /* Add left: 0; to ensure the footer starts from the left */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box; /* Add box-sizing to include padding and border in the element's total width and height */
+  }
+  .footer-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
