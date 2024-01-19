@@ -1,13 +1,13 @@
-class StressSleepRelationshipVisualizer {
+class SleepActivityRelationshipVisualizer {
   constructor(data) {
     this.data = data;
   }
 
   createVisualization() {
-    const stressLevels = Object.values(this.data['Stress Level']);
-    const sleepDurations = Object.values(this.data['Sleep Duration']);
+    const activityLevels = Object.values(this.data['Physical Activity Level']);
+    const sleepQualities = Object.values(this.data['Quality of Sleep']);
 
-    const svg = d3.select("#stressSleepRelationship")
+    const svg = d3.select("#sleepActivityRelationship")
       .append("svg")
       .attr("width", 400)
       .attr("height", 300);
@@ -17,11 +17,11 @@ class StressSleepRelationshipVisualizer {
     const height = 300 - margin.top - margin.bottom;
 
     const x = d3.scaleLinear()
-      .domain([0, d3.max(stressLevels)]).nice()
+      .domain([0, d3.max(activityLevels)]).nice()
       .range([margin.left, width - margin.right]);
 
     const y = d3.scaleLinear()
-      .domain([0, d3.max(sleepDurations)]).nice()
+      .domain([0, d3.max(sleepQualities)]).nice()
       .range([height - margin.bottom, margin.top]);
 
     svg.append("g")
@@ -31,7 +31,7 @@ class StressSleepRelationshipVisualizer {
       .attr("x", width / 2)
       .attr("y", 35)
       .attr("fill", "#000")
-      .text("Stress Level");
+      .text("Physical Activity Level");
 
     svg.append("g")
       .attr("transform", `translate(${margin.left},0)`)
@@ -42,24 +42,24 @@ class StressSleepRelationshipVisualizer {
       .attr("x", -height / 2)
       .attr("fill", "#000")
       .attr("text-anchor", "middle")
-      .text("Sleep Duration");
+      .text("Quality of Sleep");
 
     svg.selectAll("circle")
-      .data(stressLevels.map((stress, index) => ({ stress, sleepDuration: sleepDurations[index] })))
+      .data(activityLevels.map((activity, index) => ({ activity, sleepQuality: sleepQualities[index] })))
       .enter().append("circle")
-      .attr("cx", d => x(d.stress))
-      .attr("cy", d => y(d.sleepDuration))
+      .attr("cx", d => x(d.activity))
+      .attr("cy", d => y(d.sleepQuality))
       .attr("r", 5)
       .attr("fill", "steelblue");
 
-      // Define padding values
-      const paddingLeft = 35; // Adjust as needed
-      const paddingTop = 5; // Adjust as needed
-      
-      // Add text with padding
-      svg.append("text")
-          .attr("x", width / 2 + paddingLeft)  // Adjust the left padding
-          .attr("y", margin.top / 2 + paddingTop)  // Adjust the top padding
+    // Define padding values
+    const paddingLeft = 35; // Adjust as needed
+    const paddingTop = 5; // Adjust as needed
+
+    // Add text with padding
+    svg.append("text")
+      .attr("x", width / 2 + paddingLeft)  // Adjust the left padding
+      .attr("y", margin.top / 2 + paddingTop)  // Adjust the top padding
   }
 }
 
@@ -67,8 +67,8 @@ class StressSleepRelationshipVisualizer {
 fetch('http://localhost:8000/read_dataset')
   .then(response => response.json())
   .then(data => {
-    const stressSleepVisualizer = new StressSleepRelationshipVisualizer(data.data);
-    stressSleepVisualizer.createVisualization();
+    const sleepActivityVisualizer = new SleepActivityRelationshipVisualizer(data.data);
+    sleepActivityVisualizer.createVisualization();
   })
   .catch(error => {
     console.error('Error fetching data:', error);

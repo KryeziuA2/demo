@@ -1,25 +1,20 @@
-class SleepDurationVisualizer {
+class OccupationVisualizer {
     constructor(data) {
       this.data = data;
     }
   
     createVisualization() {
-      const sleepDurations = Object.values(this.data['Sleep Duration']);
-      const durationCounts = {};
+      const occupationCounts = Object.values(this.data['Occupation']).reduce((counts, occupation) => {
+        counts[occupation] = (counts[occupation] || 0) + 1;
+        return counts;
+      }, {});
   
-      sleepDurations.forEach(duration => {
-        const durationGroup = Math.floor(duration);
-        durationCounts[durationGroup] = (durationCounts[durationGroup] || 0) + 1;
-      });
-  
-      const durationData = Object.keys(durationCounts).map(durationGroup => ({
-        durationGroup,
-        count: durationCounts[durationGroup]
+      const occupationData = Object.keys(occupationCounts).map(occupation => ({
+        occupation,
+        count: occupationCounts[occupation]
       }));
   
-      durationData.sort((a, b) => a.durationGroup - b.durationGroup);
-  
-      const svg = d3.select("#sleepDuration")
+      const svg = d3.select("#occupation")
         .append("svg")
         .attr("width", 400)
         .attr("height", 300);
@@ -29,33 +24,36 @@ class SleepDurationVisualizer {
       const height = 300 - margin.top - margin.bottom;
   
       const x = d3.scaleBand()
-        .domain(durationData.map(d => d.durationGroup))
+        .domain(occupationData.map(d => d.occupation))
         .range([margin.left, width - margin.right])
         .padding(0.1);
   
       const y = d3.scaleLinear()
-        .domain([0, d3.max(durationData, d => d.count)]).nice()
+        .domain([0, d3.max(occupationData, d => d.count)]).nice()
         .range([height - margin.bottom, margin.top]);
   
       svg.append("g")
         .attr("fill", "steelblue")
         .selectAll("rect")
-        .data(durationData)
+        .data(occupationData)
         .join("rect")
-        .attr("x", d => x(d.durationGroup))
+        .attr("x", d => x(d.occupation))
         .attr("y", d => y(d.count))
         .attr("height", d => y(0) - y(d.count))
         .attr("width", x.bandwidth());
   
       svg.append("g")
         .attr("transform", `translate(0,${height - margin.bottom})`)
-        .call(d3.axisBottom(x));
+        .call(d3.axisBottom(x))
+        .selectAll("text")
+        .attr("transform", "rotate(-45)")
+        .style("text-anchor", "end");
   
       svg.append("g")
         .attr("transform", `translate(${margin.left},0)`)
         .call(d3.axisLeft(y));
   
-    // Define padding values
+   // Define padding values
 const paddingLeft = 20; // Adjust as needed
 const paddingTop = 5; // Adjust as needed
 
@@ -63,8 +61,7 @@ const paddingTop = 5; // Adjust as needed
 svg.append("text")
     .attr("x", width / 2 + paddingLeft)  // Adjust the left padding
     .attr("y", margin.top / 2 + paddingTop)  // Adjust the top padding
-    .attr("text-anchor", "middle")
-        .text("Sleep Duration Distribution");
+    ;
     }
   }
   
@@ -72,8 +69,8 @@ svg.append("text")
   fetch('http://localhost:8000/read_dataset')
     .then(response => response.json())
     .then(data => {
-      const sleepDurationVisualizer = new SleepDurationVisualizer(data.data);
-      sleepDurationVisualizer.createVisualization();
+      const occupationVisualizer = new OccupationVisualizer(data.data);
+      occupationVisualizer.createVisualization();
     })
     .catch(error => {
       console.error('Error fetching data:', error);

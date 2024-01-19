@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relationship Entities Visualization</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <!-- Include separate script files for other entities -->
+  <script src="StressSleepRelationshipVisualization.js" defer></script>
+  <script src="SleepActivityRelationshipVisualization.js" defer></script>
+  <script src="HeartDailyStepsRelationshipVisualization.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <h1>Relationship Entities Visualization</h1>
+  </header>
+  <nav>
+    <ul>
+        <li style="padding: 2px;"><a href="Index.html">&larr; Back</a></li>
+    </ul>
+</nav>
+<div style="padding: 25px; border: 2px solid #3da469;">
+    <h2 style="color: #3da469;">Usecase</h2>
+    <h3 style="color: #3da469;">Relationship Entities:</h3>
+    <p> 
+      Entities: Sleep Duration and Stress Level.     
+      </p>
+      <p>
+      Users can explore the relationship between sleep duration and stress levels using the dropdown menu by Selecting Relationship.
+      </p>
+          <p>Visualizations can include suitable graphs to highlight correlations or patterns between these two specific health parameters.</p>
+      <p>
+      This allows users to understand how changes in sleep duration may relate to stress levels, providing valuable insights into the interconnectedness of these factors.
+    </p>
+</div>
+  <div class="content-container">
+   
+    <div id="stressSleepRelationship" class="visualization">
+        <!-- Content for Stress-Sleep Relationship Visualization -->
+        <h2>Stress-Sleep Relationship Visualization</h2>
+      </div>
+  </div>
+
+  <div id="sleepActivityRelationship" class="visualization">
+    <!-- Content for Stress-Sleep Relationship Visualization -->
+    <h2>Sleep Activity Relationship Visualization</h2>
+  </div>
+  
+  <div id="heartDailyStepsRelationship" class="visualization">
+    <!-- Content for Stress-Sleep Relationship Visualization -->
+    <h2>Heart Rate and Daily Steps Relationship Visualization</h2>
+  </div>
+
+</div>
+
+  <div class="footer-container">
+    <footer>
+      <p>&copy; 2024 Health Metrics Visualization</p>
+    </footer>
+  </div>
+
+</body>
+
+</html>

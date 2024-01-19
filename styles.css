@@ -32,7 +32,16 @@ body {
   a:hover {
     background-color: #3da469;
   }
-  
+  h2 {
+    color: #3da469;
+    text-align: center;
+    margin-top: 20px; /* Adjust the margin-top value as needed */
+    margin-bottom: 20px; /* Adjust the margin-bottom value as needed */
+    padding: 10px;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 30px;
+  }
   /* Header */
   header {
     background-color: #4fd484;

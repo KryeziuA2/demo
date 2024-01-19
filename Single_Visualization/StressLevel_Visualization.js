@@ -63,8 +63,7 @@ const paddingTop = 5; // Adjust as needed
 svg.append("text")
     .attr("x", width / 2 + paddingLeft)  // Adjust the left padding
     .attr("y", margin.top / 2 + paddingTop)  // Adjust the top padding
-    .attr("text-anchor", "middle")
-        .text("Stress Level Distribution");
+   ;
     }
   }
   
