@@ -1,32 +1,48 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
-import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+import json
+import plotly.express as px
 
-app = FastAPI()
 
-# Allow CORS for all origins
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Change this to the specific domain if needed
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# Read data from CSV file
+file_path = "./Sleep_health_and_lifestyle_dataset/data.csv"
+data = pd.read_csv(file_path)
 
-@app.get("/read_dataset")
-def read_dataset():
-    try:
-        file_path = "./Sleep_health_and_lifestyle_dataset/data.csv"
+# Create FHIR-like resources
+fhir_resources = []
 
-        # Read the CSV file using pandas
-        data = pd.read_csv(file_path)
+for _, entry in data.iterrows():
+    resource = {
+        "resourceType": "PersonData",
+        "PersonID": entry["Person ID"],
+        "Gender": entry["Gender"],
+        "Age": entry["Age"],
+        "Occupation": entry["Occupation"],
+        "SleepDuration": entry["Sleep Duration"],
+        "QualityOfSleep": entry["Quality of Sleep"],
+        "PhysicalActivityLevel": entry["Physical Activity Level"],
+        "StressLevel": entry["Stress Level"],
+        "BMICategory": entry["BMI Category"],
+        "BloodPressure": entry["Blood Pressure"],
+        "HeartRate": entry["Heart Rate"],
+        "DailySteps": entry["Daily Steps"],
+        "SleepDisorder": entry["Sleep Disorder"]
+    }
+    fhir_resources.append(resource)
 
-        # Replace NaN and infinity values with None
-        data.replace([np.nan, np.inf, -np.inf], None, inplace=True)
+# Create a FHIR Bundle
+fhir_bundle = {
+    "resourceType": "Bundle",
+    "type": "collection",
+    "entry": [{"resource": res} for res in fhir_resources]
+}
 
-        # Convert to dictionary and return
-        dataset_dict = data.to_dict()
-        return {"success": True, "data": dataset_dict}
-    except Exception as e:
-        return {"success": False, "error": str(e)}
+# Convert to JSON
+json_data = json.dumps(fhir_bundle, indent=2)
+
+# Write JSON data to a file
+with open("output.json", "w", encoding="utf-8") as json_file:
+    json_file.write(json_data)
+
+print("Conversion completed. JSON data written to output.json")
